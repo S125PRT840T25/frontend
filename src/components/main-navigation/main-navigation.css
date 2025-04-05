@@ -1,0 +1,60 @@
+.sidebar {
+    height: 100vh;
+    width: var(--main-navbar-width);
+    position: fixed;
+    top: 0;
+    left: 0;
+    background-color: var(--primary-bg-color) !important;    
+  }
+  
+  .navbar {
+    width: 100%;
+    height: 100%;
+  }
+  
+  .navbar-brand {
+    padding: 20px;
+    font-size: 1.5rem;
+    color: var(--navigation-font-color) !important;
+  }
+
+  .large-first-letter {
+    display: inline-block;
+    color: var(--navigation-font-color) !important;
+    font-size: 18px !important;
+  }
+
+  .large-first-letter::first-letter {
+    font-size: 30px !important;  /* Increase the font size of the first letter */
+  }
+  
+  .nav-link {
+    font-family: var(--font-inter);
+    font-size: var(--primary-font-size) !important;
+    color: var(--navigation-font-color) !important;    
+  }
+  
+  .nav-item:hover {
+    background-color: var(--primary-bg-highlight) !important;
+    border-radius: 5px !important;
+  }
+
+  .page-layout-logo{
+    width: 100%;
+    height: var(--header-height) !important;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    background-color: var(--primary-bg-highlight) !important;
+  }
+
+  .active-nav {
+    background-color: var(--primary-bg-highlight) !important; /* Adjust to your theme */
+  }
+  
+  @media (max-width: 768px) {
+    .sidebar {
+      width: 200px;
+    }
+  }
+  

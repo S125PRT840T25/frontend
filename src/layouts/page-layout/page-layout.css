@@ -1,0 +1,23 @@
+.content {
+    margin-left: var(--main-navbar-width); /* Offset by the sidebar width */
+    padding: 20px;
+    flex-grow: 1;
+    overflow-y: auto; /* Ensure content can scroll if needed */
+    font-family: var(--font-inter);
+  }
+
+.margin-left-5{
+    margin-left: 5px;
+}
+
+.padding-top-20{
+    padding-top: 20px !important;
+}
+
+.padding-top-0{
+    padding-top: 0px !important;
+}
+
+.width-90-p{
+    width: 90% !important;
+}

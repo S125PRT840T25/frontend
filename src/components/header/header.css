@@ -1,0 +1,35 @@
+/* Ensure the header takes up full width and looks good on all devices */
+.header {
+    display: flex;
+    justify-content: space-between !important;
+    align-items: center;
+    padding-right: 20px !important;
+    padding-left: var(--main-navbar-width) !important;
+    font-family: var(--font-inter);
+    height: var(--header-height);
+    border-bottom: var(--primary-border);
+  }
+  
+  /* Title on the left */
+  .left-title {
+    font-size: 20px !important;
+    font-weight: 300;
+    color: var(--header-font-color) !important;
+  }
+  
+  /* Align the user icon and username */
+  .user-icon {
+    color: var(--header-font-color);
+  }
+  
+  .username {
+    color: var(--header-font-color);
+    font-size: 15px;
+
+  }
+  
+  /* Ensure spacing between icon and username */
+  .ml-2 {
+    margin-left: 8px;
+  }
+  

@@ -1,0 +1,145 @@
+/* Import the variables */
+@import '../../variables.css';
+
+/* Set the body and html to ensure full height and zero margin/padding */
+html, body {
+    height: 100%;
+    margin: 0;
+    padding: 0;
+}
+
+/* Main container for the full-screen layout */
+.login-container {
+    display: flex;
+    height: 100vh; /* Full height of the screen */
+}
+
+/* Left Panel - takes 70% width and has a background color of #007A87 */
+.left-panel {
+    width: 70%;
+    background-color: var(--primary-bg-color);
+    color: white;
+    padding: 20px; 
+    display: flex;
+    flex-direction: column;
+}
+
+/* Right Panel - takes 30% width and has a white background */
+.right-panel {
+    width: 30%;
+    background-color: var(--secondary-bg-color);
+    display: flex;
+    flex-direction: column;
+    padding: 20px; 
+    justify-content: center;
+}
+
+/* Footer - fixed at the bottom of the page */
+footer {
+    height: 20px;
+    background-color: var(--footer-bg-color);
+    text-align: center;
+    line-height: 10px;
+    color: var(--footer-text-color);
+    font-size: 12px;
+    position: fixed;
+    width: 100%;
+    bottom: 0;
+}
+  
+.header-text {
+    font-size: 50px;
+    margin-bottom: 10px;
+    text-align: center;
+    font-family: var(--font-inter);
+    font-weight: 100;
+}
+
+.image-container {
+    display: flex;
+    flex-direction: column;
+    gap: 15px; /* Space between the images */
+    align-items: center;
+}
+
+.panel-image-large {
+    width: 80%; /* Adjust size of the images */
+    height: auto;
+    object-fit: contain;
+}
+
+.panel-image-small {
+    width: 20%; /* Adjust size of the images */
+    height: auto;
+    object-fit: contain;
+}
+
+.login-header{
+    font-family: var(--font-inter);
+}
+
+.form-controls-container{
+    padding: 20px;
+    border: var(--primary-border);
+    border-radius: 5px;
+}
+
+.mobile-header-text{
+    color: var(--primary-bg-color);
+    text-align: center;
+    font-size: 30px;
+}
+
+@media (min-width: 1200px) {  /* larger screens */
+    .mobile-header{
+        display: none;
+    }
+
+    .login-form {
+      width: 70%;
+    }
+}
+  
+@media (max-width: 1199px) and (min-width: 992px) {  /* laptops */
+    .mobile-header{
+        display: none;
+    }
+
+    .login-form {
+      width: 75%;
+    }
+}
+
+@media (max-width: 991px) and (min-width: 768px) {  /* tabs */
+    .mobile-header-text{        
+        font-size: 50px;
+    }
+
+    .left-panel{
+        display: none;
+    }
+
+    .right-panel{
+        width: 100%;
+        justify-content: space-around;
+    }
+
+    .login-form {
+      width: 75%;
+    }
+}
+
+@media (max-width: 767px) {  /* mobile */
+    .left-panel{
+        display: none;
+    }
+
+    .right-panel{
+        width: 100%;
+        justify-content: space-around;
+    }
+
+    .login-form {
+      width: 75%;
+    }
+}

@@ -18,9 +18,20 @@
     "resolveJsonModule": true,
     "isolatedModules": true,
     "noEmit": true,
-    "jsx": "react-jsx"
+    "jsx": "react-jsx",
+    "baseUrl": "src",
+    "paths": {
+      "@components": ["components/index.ts"],
+      "@layouts": ["layouts/index.ts"],
+      "@store": ["redux/store.ts"],
+      "@slices": ["redux/slices/index.ts"],
+      "@api": ["api/axios.ts"],
+      "@api-paths": ["api/api-config.ts"],    
+      "@api-mutations": ["api/mutations/index.ts"],     
+      "@api-queries": ["api/queries/index.ts"],        
+    }
   },
   "include": [
     "src"
-  ]
+  ],
 }

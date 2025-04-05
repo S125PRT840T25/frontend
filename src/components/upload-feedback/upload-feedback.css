@@ -1,0 +1,47 @@
+.drop-zone {
+    border: 2px dashed #ccc;
+    padding: 20px;
+    justify-content: center;
+    align-items: center;
+    display: flex;
+    cursor: pointer;
+    margin-bottom: 20px;
+    height: 250px;
+    flex-direction: column;
+    font-size: var(--primary-font-size);
+    font-family: var(--font-inter) !important;
+    color: var(--primary-font-color);
+}
+
+.drop-zone.active {
+    background-color: #e6edf1;
+}
+
+.upload-icon{
+    font-size: 30px;
+}
+
+.file-item {
+    background-color: #f8f8f8 !important;
+    border-radius: 5px !important;
+    border: 1px solid #ddd; /* Optional subtle border */
+    padding: 1rem;
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    margin-bottom: 1rem;
+    max-width: 400px !important;
+  }
+  
+  .file-item span {
+    font-weight: 400 !important;
+    font-size: var(--primary-font-size);
+    color: var(--primary-font-color);
+    font-family: var(--font-inter) !important;
+  }
+  
+  .file-item button {
+    margin-left: 0.5rem;
+    font-size: var(--primary-font-size);
+    font-family: var(--font-inter) !important;
+  }
