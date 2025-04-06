@@ -8,13 +8,15 @@ import { useTaskStatuses } from '@api-queries';
 import { FontAwesomeIcon } from '@fortawesome/react-fontawesome';
 import { faCloudArrowUp } from '@fortawesome/free-solid-svg-icons';
 import { toast, ToastContainer } from 'react-toastify';
-import { Button, ListGroup, ListGroupItem } from 'react-bootstrap';
+import { Button, ListGroup, ListGroupItem, Modal } from 'react-bootstrap';
 import { useEffect, useState } from 'react';
 
 export function UploadFeedback(): any {
     const dispatch = useDispatch();
     const files = useSelector((state: RootState) => state.uploadFeedbackState.files);
     const [isUploading, setIsUploading] = useState(false);
+    const [showRemoveConfirmModel, setShowRemoveConfirmModel] = useState(false);
+    const [removingFileId, setRemovingFileId] = useState<number | null>(null);
 
     const { mutateAsync: uploadFeedback, status: uploadStatus } = useUploadFeedback();
     const taskStatuses = useTaskStatuses(files);
@@ -84,6 +86,20 @@ export function UploadFeedback(): any {
     const handleDownload = (downloadUrl: string) => {     
         window.open(downloadUrl, '_blank');          
     };
+
+    const handleRemoveConfirmClose = () => setShowRemoveConfirmModel(false);
+    const handleRemoveConfirmShow = (fileId: any) => {
+        setRemovingFileId(fileId);
+        setShowRemoveConfirmModel(true)
+    };
+
+    const handleDelete = () => {
+        if(removingFileId != null){
+            dispatch(removeFile(removingFileId));
+            setRemovingFileId(null);
+        }            
+        handleRemoveConfirmClose();
+    };
         
     useEffect(() => {
         taskStatuses.forEach((taskQuery) => {
@@ -128,7 +144,7 @@ export function UploadFeedback(): any {
                                     variant="outline-danger"
                                     size="sm"
                                     className="me-2"
-                                    onClick={() => dispatch(removeFile(file.id))}
+                                    onClick={() => handleRemoveConfirmShow(file.id)}
                                     >
                                     Remove
                                 </Button>
@@ -139,6 +155,20 @@ export function UploadFeedback(): any {
                 ))}
                 </ListGroup>
             <ToastContainer />
+            <Modal show={showRemoveConfirmModel} onHide={handleRemoveConfirmClose} size="sm" centered>
+                <Modal.Header closeButton className="py-2">
+                    <Modal.Title className="fs-6">Confirm</Modal.Title>
+                </Modal.Header>
+                <Modal.Body className="fs-6 text-center">Are you sure?</Modal.Body>
+                <Modal.Footer className="d-flex justify-content-center py-2">
+                    <Button variant="secondary" size="sm" onClick={handleRemoveConfirmClose}>
+                        Cancel
+                    </Button>
+                    <Button variant="danger" size="sm" onClick={handleDelete}>
+                        Remove
+                    </Button>
+                </Modal.Footer>
+            </Modal>
         </div>
     );
 }
