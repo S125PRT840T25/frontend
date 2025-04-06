@@ -31,7 +31,7 @@ export function UploadFeedback(): any {
         }
         
         setIsUploading(true);
-
+        
         acceptedFiles.forEach(file => {
             if (file.type !== 'text/csv') {                
                 toast.error("Only CSV files are allowed.", {
@@ -42,6 +42,14 @@ export function UploadFeedback(): any {
                 });
                 return;
             }
+
+            const toastId = toast.info(`Uploading: ${(acceptedFiles.length > 0 ? acceptedFiles[0].name : '')}`, {
+                position: 'bottom-right',
+                autoClose: false, 
+                hideProgressBar: true,
+                closeOnClick: false,
+                
+            });
             
             uploadFeedback(file).then((data) => {
                 const taskId = data.task_id;
@@ -58,6 +66,10 @@ export function UploadFeedback(): any {
             })
             .finally(() => {
                 setIsUploading(false);  // End upload process
+
+                setTimeout(() => {
+                    toast.dismiss(toastId); 
+                }, 3000);
             });
         });
     };
@@ -72,7 +84,7 @@ export function UploadFeedback(): any {
     const handleDownload = (downloadUrl: string) => {     
         window.open(downloadUrl, '_blank');          
     };
-    
+        
     useEffect(() => {
         taskStatuses.forEach((taskQuery) => {
           if (taskQuery.data?.status === 'Success') {
