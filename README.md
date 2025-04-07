@@ -15,9 +15,9 @@ npm install
 # or
 yarn install
 
-npm run dev
+npm start
 # or
-yarn dev
+yarn start
 
 ## Project Structure
 
@@ -33,3 +33,5 @@ src/
 ├──redux/                    # State management (ex - slices)
 ├──variables.css             # Common css values (ex- Theme colors, and font sizes)
 └──app.tsx                    # Main application entry point
+
+
