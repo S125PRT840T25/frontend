@@ -18,9 +18,11 @@ yarn install
 npm start
 # or
 yarn start
+```
+
 
 ## Project Structure
-
+```sh
 src/
 ├──api/                      # API related components including configurations, queries, and mutations
 |   ├──mutations/            # Mutations (ex- to modify data) 
@@ -33,5 +35,5 @@ src/
 ├──redux/                    # State management (ex - slices)
 ├──variables.css             # Common css values (ex- Theme colors, and font sizes)
 └──app.tsx                    # Main application entry point
-
+```
 
