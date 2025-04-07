@@ -24,7 +24,7 @@ yarn start
 ## Project Structure
 ```sh
 src/
-├──api/                      # API related components including configurations, queries, and mutations
+├──api/                      # API related components (ex- configurations, queries, and mutations)
 |   ├──mutations/            # Mutations (ex- to modify data) 
 |   ├──queries/              # Queries (ex- to retireve data)
 |   ├──api-config.ts         # API path configurations
