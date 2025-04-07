@@ -28,7 +28,7 @@ src/
 |   ├──mutations/            # Mutations (ex- to modify data) 
 |   ├──queries/              # Queries (ex- to retireve data)
 |   ├──api-config.ts         # API path configurations
-|   └─axios.ts               # Axios object to make api calls
+|   └──axios.ts              # Axios object to make api calls
 ├──components/               # Re-usable components
 ├──layouts/                  # UI templates
 ├──pages/                    # Pages or modules
