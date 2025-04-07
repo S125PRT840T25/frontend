@@ -34,6 +34,6 @@ src/
 ├──pages/                    # Pages or modules
 ├──redux/                    # State management (ex - slices)
 ├──variables.css             # Common css values (ex- Theme colors, and font sizes)
-└──app.tsx                    # Main application entry point
+└──app.tsx                   # Main application entry point
 ```
 
