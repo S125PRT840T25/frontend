@@ -104,7 +104,7 @@ export function UploadFeedback(): any {
     useEffect(() => {
         taskStatuses.forEach((taskQuery) => {
           if (taskQuery.data?.status === 'Success') {
-            const taskId = taskQuery.data?.task_id;
+            const taskId = taskQuery.data?.download_url.split("/").pop(); //taskQuery.data?.task_id;
             dispatch(setDownloadReady({
               taskId: taskId,
               displayText: '',
