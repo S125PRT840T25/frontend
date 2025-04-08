@@ -1,7 +1,7 @@
 import { useDispatch, useSelector } from 'react-redux';
 import './upload-feedback.css';
 import { RootState } from '@store';
-import { addFile, removeFile, setDownloadReady, UploadFileModel } from '@slices';
+import { addFile, removeFile, setDownloadReady, setProcessProgress, UploadFileModel } from '@slices';
 import { useDropzone } from 'react-dropzone';
 import { useUploadFeedback } from '@api-mutations';
 import { useTaskStatuses } from '@api-queries';
@@ -56,7 +56,7 @@ export function UploadFeedback(): any {
             uploadFeedback(file).then((data) => {
                 const taskId = data.task_id;
                 // After file upload, dispatch the file details to the Redux store
-                const fileDetails: UploadFileModel = {fileName: file.name, taskId: taskId, displayText: (!taskId? data.error : ' is processing.')}
+                const fileDetails: UploadFileModel = {fileName: file.name, taskId: taskId, displayText: (!taskId? data.error : 'Pending.')}
                 dispatch(addFile(fileDetails));
             }).catch((error) => {
                 toast.error("Error uploading file.", {
@@ -102,14 +102,25 @@ export function UploadFeedback(): any {
     };
         
     useEffect(() => {
-        taskStatuses.forEach((taskQuery) => {
-          if (taskQuery.data?.status === 'Success') {
-            const taskId = taskQuery.data?.download_url.split("/").pop(); //taskQuery.data?.task_id;
+        taskStatuses.forEach((taskQuery: any) => {
+          if (taskQuery.data?.response?.status === 'Success') {
+            const taskId = taskQuery.data.response?.download_url.split("/").pop(); //taskQuery.data?.task_id;
             dispatch(setDownloadReady({
               taskId: taskId,
               displayText: '',
-              status: taskQuery.data?.status,
-              downloadUrl: taskQuery.data?.download_url,
+              status: taskQuery.data.response?.status,
+              downloadUrl: taskQuery.data.response?.download_url,
+              currentProgress: 10,
+              totalProgress: 10
+            }));
+          }
+          else if(taskQuery.data?.response?.status === 'Processing' || taskQuery.data?.response?.status === 'Pending'){
+            dispatch(setProcessProgress({
+              taskId: taskQuery.data.taskId,
+              displayText: taskQuery.data?.response?.status,
+              status: taskQuery.data.response?.status,
+              currentProgress: taskQuery.data.response?.current,
+              totalProgress: taskQuery.data.response?.total
             }));
           }
         });
@@ -127,8 +138,15 @@ export function UploadFeedback(): any {
                     <ListGroupItem
                     key={file.id}
                     className="d-flex justify-content-between align-items-center mb-2 p-3 file-item">
-                    <span>
-                        <strong>{file.fileName}</strong> {file.displayText}
+                    <span className='progress-container'>
+                        <strong>{file.fileName}</strong> 
+                        <progress className='progress-bar' hidden={file.totalProgress > 0 && file.currentProgress == file.totalProgress} value={file.currentProgress} max={file.totalProgress}></progress> 
+                        <div>
+                            {file.status == "Pending" && (<span className='ml-10'>({file.displayText?.trim()})</span>)} 
+                            {file.totalProgress > 0 && file.currentProgress != file.totalProgress && (
+                                <strong className='ml-10'>({((file.currentProgress / file.totalProgress) * 100).toFixed(0)}%)</strong>
+                            )}
+                        </div>
                     </span>
                     <div>                        
                         {file.status === 'Success' && (

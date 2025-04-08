@@ -9,6 +9,8 @@ export type UploadFileModel = {
     status?: string;
     downloadUrl?: string;
     downloadButtonText?: string;
+    currentProgress?: number;
+    totalProgress?: number;
 }
 
 interface UploadFeedbackState {
@@ -29,7 +31,9 @@ const uploadFeedbackSlice = createSlice({
         fileName: action.payload.fileName,
         taskId: action.payload.taskId,
         displayText: action.payload.displayText,
-        downloadButtonText: 'Download'
+        downloadButtonText: 'Download',
+        totalProgress: 0,
+        currentProgress: 0
       };
       state.files.push(newFile);
     },
@@ -50,14 +54,16 @@ const uploadFeedbackSlice = createSlice({
         file.displayText = displayText;
       }
     },
-    setDownloadReady: (state, action: PayloadAction<{ taskId: string, displayText: string, status: string, downloadUrl: string }>) => {
-      const { taskId, displayText, status, downloadUrl } = action.payload;
+    setDownloadReady: (state, action: PayloadAction<{ taskId: string, displayText: string, status: string, downloadUrl: string, currentProgress: number, totalProgress: number }>) => {
+      const { taskId, displayText, status, downloadUrl, currentProgress, totalProgress } = action.payload;
       const file = state.files.find(file => file.taskId === taskId);
       if (file) {
         const baseUrl = API_BASE_URL.replace(/\/api$/, "");  
         file.displayText = displayText;
         file.status = status;
         file.downloadUrl = baseUrl + downloadUrl;
+        file.currentProgress = currentProgress;
+        file.totalProgress = totalProgress;
       }
     },
     setDownloadButtonText: (state, action: PayloadAction<{downloadUrl: string, displayText: string}>) => {      
@@ -66,9 +72,22 @@ const uploadFeedbackSlice = createSlice({
         file.downloadButtonText = action.payload.displayText;
       }
     },
+    setProcessProgress: (state, action: PayloadAction<{ taskId: string, status: string, displayText?: string, currentProgress: number, totalProgress: number }>) => {
+      const { taskId, status, displayText, currentProgress, totalProgress } = action.payload;
+      const file = state.files.find(file => file.taskId === taskId);
+      if (file) {
+        file.status = status;
+        const newDisplayText = displayText; 
+        if(file.displayText?.trim() != newDisplayText?.trim()){
+          file.displayText = newDisplayText;
+        }
+        file.currentProgress = currentProgress;
+        file.totalProgress = totalProgress;
+      }
+    },
   },
 });
 
-export const { addFile, removeFile, setFileTaskId, setFileDisplayText, setDownloadReady, setDownloadButtonText } = uploadFeedbackSlice.actions;
+export const { addFile, removeFile, setFileTaskId, setFileDisplayText, setDownloadReady, setDownloadButtonText, setProcessProgress } = uploadFeedbackSlice.actions;
 export default uploadFeedbackSlice.reducer;
 

@@ -45,3 +45,17 @@
     font-size: var(--primary-font-size);
     font-family: var(--font-inter) !important;
   }
+
+  .progress-container{
+    display: flex;
+    align-items: center;
+  }
+
+  .progress-bar{
+    margin-left: 5px !important;
+    background-color: white !important;
+  }
+
+  .ml-10{
+    margin-left: 5px !important;
+  }
