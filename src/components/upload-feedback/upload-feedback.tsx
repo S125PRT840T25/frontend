@@ -157,17 +157,17 @@ export function UploadFeedback(): any {
                                     onClick={() => handleDownload(file.downloadUrl)}
                                 >
                                     {file.downloadButtonText}
-                                </Button>
-                                <Button
-                                    variant="outline-danger"
-                                    size="sm"
-                                    className="me-2"
-                                    onClick={() => handleRemoveConfirmShow(file.id)}
-                                    >
-                                    Remove
-                                </Button>
+                                </Button>                                
                             </div>
                         )}
+                        <Button
+                            variant="outline-danger"
+                            size="sm"
+                            className="me-2"
+                            onClick={() => handleRemoveConfirmShow(file.id)}
+                            >
+                            Remove
+                        </Button>
                     </div>
                     </ListGroupItem>
                 ))}
