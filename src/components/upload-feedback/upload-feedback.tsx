@@ -148,26 +148,26 @@ export function UploadFeedback(): any {
                             )}
                         </div>
                     </span>
-                    <div>                        
-                        {file.status === 'Success' && (
+                    <div> 
                             <div>
+                                {file.status === 'Success' && (
+                                    <Button
+                                        variant="outline-secondary"
+                                        size="sm"
+                                        onClick={() => handleDownload(file.downloadUrl)}
+                                    >
+                                        {file.downloadButtonText}
+                                    </Button>      
+                                )}
                                 <Button
-                                    variant="outline-secondary"
+                                    variant="outline-danger"
                                     size="sm"
-                                    onClick={() => handleDownload(file.downloadUrl)}
-                                >
-                                    {file.downloadButtonText}
-                                </Button>                                
-                            </div>
-                        )}
-                        <Button
-                            variant="outline-danger"
-                            size="sm"
-                            className="me-2"
-                            onClick={() => handleRemoveConfirmShow(file.id)}
-                            >
-                            Remove
-                        </Button>
+                                    className="me-2"
+                                    onClick={() => handleRemoveConfirmShow(file.id)}
+                                    >
+                                    Remove
+                                </Button>                          
+                            </div>                        
                     </div>
                     </ListGroupItem>
                 ))}
