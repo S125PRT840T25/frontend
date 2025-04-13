@@ -32,8 +32,6 @@ export function UploadFeedback(): any {
             return;
         }
         
-        setIsUploading(true);
-        
         acceptedFiles.forEach(file => {
             if (file.type !== 'text/csv') {                
                 toast.error("Only CSV files are allowed.", {
@@ -52,6 +50,8 @@ export function UploadFeedback(): any {
                 closeOnClick: false,
                 
             });
+            
+            setIsUploading(true);
             
             uploadFeedback(file).then((data) => {
                 const taskId = data.task_id;
