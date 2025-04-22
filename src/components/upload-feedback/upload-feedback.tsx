@@ -32,8 +32,6 @@ export function UploadFeedback(): any {
             return;
         }
         
-        setIsUploading(true);
-        
         acceptedFiles.forEach(file => {
             if (file.type !== 'text/csv') {                
                 toast.error("Only CSV files are allowed.", {
@@ -52,6 +50,8 @@ export function UploadFeedback(): any {
                 closeOnClick: false,
                 
             });
+            
+            setIsUploading(true);
             
             uploadFeedback(file).then((data) => {
                 const taskId = data.task_id;
@@ -148,16 +148,17 @@ export function UploadFeedback(): any {
                             )}
                         </div>
                     </span>
-                    <div>                        
-                        {file.status === 'Success' && (
+                    <div> 
                             <div>
-                                <Button
-                                    variant="outline-secondary"
-                                    size="sm"
-                                    onClick={() => handleDownload(file.downloadUrl)}
-                                >
-                                    {file.downloadButtonText}
-                                </Button>
+                                {file.status === 'Success' && (
+                                    <Button
+                                        variant="outline-secondary"
+                                        size="sm"
+                                        onClick={() => handleDownload(file.downloadUrl)}
+                                    >
+                                        {file.downloadButtonText}
+                                    </Button>      
+                                )}
                                 <Button
                                     variant="outline-danger"
                                     size="sm"
@@ -165,9 +166,8 @@ export function UploadFeedback(): any {
                                     onClick={() => handleRemoveConfirmShow(file.id)}
                                     >
                                     Remove
-                                </Button>
-                            </div>
-                        )}
+                                </Button>                          
+                            </div>                        
                     </div>
                     </ListGroupItem>
                 ))}
